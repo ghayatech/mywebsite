@@ -1,0 +1,17 @@
+# استثناء ملف sftp
+sftp.json
+
+# استثناء مجلد إعدادات VS Code بالكامل
+.vscode/
+
+# استثناء مجلد node_modules (لو استخدمت npm أو build tools)
+node_modules/
+
+# استثناء مجلدات build/output المؤقتة
+dist/
+build/
+vendor/
+video/
+# استثناء ملفات النظام
+.DS_Store
+Thumbs.db
