@@ -6,7 +6,9 @@
     <title>{{ __('messages.dashboard') }}</title>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/tailwind.min.css') }}" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" sizes="180x180" href="{{ asset('assets/images/logo-ghaya2.png') }}">
 
 </head>
 
