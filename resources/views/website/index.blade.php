@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ App::getLocale() }}">
 
 <head>
     <meta charset="UTF-8" />
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
-<body>
+<body dir="{{ App::getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
     <header class="ghaya-header">
         <div class="ghaya-logo">
@@ -281,7 +281,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -330,48 +330,44 @@
             form.addEventListener("submit", function(e) {
                 e.preventDefault();
 
+                // تحقق من وجود التوكن الخاص بـ reCAPTCHA
+                const token = document.querySelector('textarea[name="g-recaptcha-response"]');
+                if (!token || !token.value) {
+                    alert("يرجى التحقق من reCAPTCHA");
+                    return;
+                }
+
                 popup.style.display = "flex";
                 document.body.classList.add("no-scroll");
 
                 const formData = new FormData(form);
 
-                grecaptcha.ready(function() {
-                    grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {
-                        action: 'contact'
-                    }).then(function(token) {
-                        const formData = new FormData(form);
-                        formData.append('g-recaptcha-response', token);
+                fetch(form.action, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                        },
+                        body: formData,
+                    })
+                    .then(res => res.text())
+                    .then(response => {
+                        popup.style.display = "none";
+                        document.body.classList.remove("no-scroll");
 
-                        fetch(form.action, {
-                                method: "POST",
-                                headers: {
-                                    "X-CSRF-TOKEN": document.querySelector(
-                                        'input[name="_token"]').value,
-                                },
-                                body: formData,
-                            })
-                            .then(res => res.text())
-                            .then(response => {
-                                popup.style.display = "none";
-                                document.body.classList.remove("no-scroll");
-
-                                if (response.includes("تم إرسال الرسالة")) {
-                                    successMsg.style.display = "block";
-                                    form.reset();
-                                    setTimeout(() => successMsg.style.display = "none",
-                                        5000);
-                                } else {
-                                    alert("فشل الإرسال:\n" + response);
-                                }
-                            })
-                            .catch(error => {
-                                popup.style.display = "none";
-                                document.body.classList.remove("no-scroll");
-                                alert("حدث خطأ في الإرسال");
-                                console.error(error);
-                            });
+                        if (response.includes("تم إرسال الرسالة")) {
+                            successMsg.style.display = "block";
+                            form.reset();
+                            setTimeout(() => successMsg.style.display = "none", 5000);
+                        } else {
+                            alert("فشل الإرسال:\n" + response);
+                        }
+                    })
+                    .catch(error => {
+                        popup.style.display = "none";
+                        document.body.classList.remove("no-scroll");
+                        alert("حدث خطأ في الإرسال");
+                        console.error(error);
                     });
-                });
             });
         });
     </script>

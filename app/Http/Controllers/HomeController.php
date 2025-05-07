@@ -18,8 +18,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo ('testssششasaششaسس');
-        exit;
+
         $blogPosts = Cache::get('blog_posts');
         if (!$blogPosts) {
             try {

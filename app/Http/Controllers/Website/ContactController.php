@@ -23,17 +23,6 @@ class ContactController extends Controller
             'g-recaptcha-response' => ['required', new Recaptcha()],
         ]);
 
-
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret'   => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response'),
-        ]);
-
-        if (!$response->json('success') || $response->json('score') < 0.5) {
-            return response('❌ فشل التحقق من reCAPTCHA.', 422);
-        }
-
-
         $name    = $request->input('name');
         $email   = $request->input('email');
         $message = $request->input('message');

@@ -536,7 +536,7 @@ header {
 
 /* About Us Section */
 .about-us {
-    background: url("images/Asset\ 2-8.png") no-repeat left center;
+    background: url("../images/Asset2-8.png") no-repeat left center;
     background-size: 530px auto;
     background-position: -1px;
     background-color: #2d6c5b;
@@ -625,7 +625,7 @@ header {
 
 /* Wrapper for unified background */
 .about-stats-wrapper {
-    background: url("images/background-1.jpg") no-repeat center center/cover;
+    background: url("../images/background-1.jpg") no-repeat center center/cover;
     background-size: 850px;
     background-position: -333px;
     background-position-x: right;
@@ -1174,7 +1174,7 @@ footer {
 /* Fix for background on Company Statistics to stretch fully on mobile */
 @media (max-width: 768px) {
     .about-stats-wrapper {
-        background-image: url("images/background-1.jpg");
+        background-image: url("../images/background-1.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -1255,7 +1255,7 @@ footer {
 
 @media (max-width: 768px) {
     .about-stats-wrapper {
-        background-image: url("images/background-1.jpg");
+        background-image: url("../images/background-1.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -1322,7 +1322,7 @@ footer {
 
 body[dir="rtl"] .about-us {
     background-position: right center;
-    background-image: url("images/Asset 2-8.png");
+    background-image: url("../images/Asset2-8.png");
 }
 
 body[dir="rtl"] .contact-logo {
