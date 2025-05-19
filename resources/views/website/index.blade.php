@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" media="all">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 </head>
 
 <body dir="{{ App::getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
@@ -51,11 +52,6 @@
                     @endif
                 @endforeach
 
-
-                {{-- <li><a href="#home" class="ghaya-nav-link">Home</a></li>
-                <li><a href="#services" class="ghaya-nav-link">Services</a></li>
-                <li><a href="#about" class="ghaya-nav-link">About</a></li>
-                <li><a href="#contact" class="ghaya-nav-link">Contact</a></li> --}}
             </ul>
 
             <div class="ghaya-language-switch">
@@ -66,7 +62,7 @@
     </header>
 
     <section class="hero" id="hero">
-        <video src="{{ asset($hero->video_url) }}" autoplay loop muted></video>
+        <video loading="lazy" src="{{ asset($hero->video_url) }}" autoplay loop muted></video>
         <div class="hero-content">
             <h1 id="title-section-1">{{ $hero->main_text }}</h1>
             <p>{{ $hero->small_paragraph }}</p>
@@ -87,7 +83,7 @@
     <!-- Statistics Section -->
     @if ($statisticsSection)
         <section class="about-stats-wrapper">
-            <h2 class="section-title" id="title-section">{{ $statisticsSection->main_text }}</h2>
+            {{-- <h2 class="section-title" id="title-section">{{ $statisticsSection->main_text }}</h2> --}}
             <div class="about-stats-1">
                 @foreach ($statisticsSection->statistics as $stat)
                     <div class="stat">
@@ -100,6 +96,25 @@
             </div>
         </section>
     @endif
+
+    <section class="services-page" id="services">
+        <h1 id="title-section">{{ __('messages.title-services-page') }}</h1>
+        <div class="services-wrapper">
+            @foreach ($services as $service)
+                @php
+                    $translation = $service->translations->firstWhere('locale', app()->getLocale());
+                @endphp
+                <div class="service-box">
+                    <i class="fas fa-{{ $service->icon }}"></i>
+                    <h3>{{ $translation->title ?? '' }}</h3>
+                    <p>{{ $translation->description ?? '' }}</p>
+                    <img loading="lazy" src="{{ asset($service->image) }}" alt="{{ $translation->title }}"
+                        class="service-img">
+                </div>
+            @endforeach
+        </div>
+    </section>
+
     <!-- Blog Section -->
     @if (!empty($blogPosts))
         <section class="blog-section" id='blog'>
@@ -149,18 +164,18 @@
         </section>
     @endif
 
-    <section class="services-page" id="services">
-        <h1 id="title-section">{{ __('messages.title-services-page') }}</h1>
-        <div class="services-wrapper">
-            @foreach ($services as $service)
-                @php
-                    $translation = $service->translations->firstWhere('locale', app()->getLocale());
-                @endphp
-                <div class="service-box">
-                    <i class="fas fa-{{ $service->icon }}"></i>
-                    <h3>{{ $translation->title ?? '' }}</h3>
-                    <p>{{ $translation->description ?? '' }}</p>
-                    <img src="{{ asset($service->image) }}" alt="{{ $translation->title }}" class="service-img">
+    <!-- Team Carousel Section -->
+    <section class="team-carousel-section" id="team">
+        <h2 class="team-title">{{ $teamSection->translations->first()?->title }}</h2>
+        <p id="paragraph-team">{{ $teamSection->translations->first()?->description }}</p>
+        <div class="carousel-container">
+            @foreach ($teamMembers as $member)
+                <div class="team-card" id="card-0">
+                    <img src="{{ asset($member->image) }}" alt="{{ $member->translations->first()?->name }}" />
+                    <h3>{{ $member->translations->first()?->name }}</h3>
+                    <p class="role">{{ $member->translations->first()?->position }}</p>
+                    <p class="description">{{ $member->translations->first()?->task_description }}</p>
+                    <p class="experience">{{ $member->translations->first()?->experience }}</p>
                 </div>
             @endforeach
         </div>
@@ -184,22 +199,7 @@
 
 
 
-    <!-- Team Carousel Section -->
-    <section class="team-carousel-section" id="team">
-        <h2 class="team-title">{{ $teamSection->translations->first()?->title }}</h2>
-        <p id="paragraph-team">{{ $teamSection->translations->first()?->description }}</p>
-        <div class="carousel-container">
-            @foreach ($teamMembers as $member)
-                <div class="team-card" id="card-0">
-                    <img src="{{ asset($member->image) }}" alt="{{ $member->translations->first()?->name }}" />
-                    <h3>{{ $member->translations->first()?->name }}</h3>
-                    <p class="role">{{ $member->translations->first()?->position }}</p>
-                    <p class="description">{{ $member->translations->first()?->task_description }}</p>
-                    <p class="experience">{{ $member->translations->first()?->experience }}</p>
-                </div>
-            @endforeach
-        </div>
-    </section>
+
 
     <section class="contact-section" id="contact-section">
         <h2 class="section-title contact-title" id="title-section">{{ __('messages.section-title.contact-section') }}

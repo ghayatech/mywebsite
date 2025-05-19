@@ -23,7 +23,7 @@ body {
     font-family: "Fairuz", sans-serif !important;
     /* التأكيد على استخدام الخط */
     line-height: 1.6;
-    background-color: #f8f9fa;
+    background-color: #2d6c5b;
     color: #333;
     overflow-x: hidden !important;
     width: 100%;
@@ -423,10 +423,19 @@ header {
 
 /* Services Section */
 .services-page {
+    background-color: #ffffff;
     padding: 4rem 2rem;
-    max-width: 1200px;
+    max-width: 100%;
     margin: auto;
+    /* هذه السطر يجعل الكروت في المنتصف */
     text-align: center;
+    display: flex;
+    justify-content: center;
+    /* توسيط المحتوى أفقيًا */
+    align-items: center;
+    /* توسيط المحتوى عموديًا */
+    flex-direction: column;
+    /* لتأكيد المحاذاة في صف واحد */
 }
 
 .services-page h1 {
@@ -437,8 +446,11 @@ header {
 
 .services-wrapper {
     display: grid;
+    max-width: 1200px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    margin: 0 auto;
+    /* لتوسيط الكروت */
 }
 
 .service-box {
@@ -625,14 +637,15 @@ header {
 
 /* Wrapper for unified background */
 .about-stats-wrapper {
-    background: url("../images/background-1.jpg") no-repeat center center/cover;
-    background-size: 850px;
+    background-color: #ffffff;
     background-position: -333px;
     background-position-x: right;
     background-position-y: top;
-    background-color: #2d6c5b;
-    padding: 40px 20px;
-    border-radius: 0px 0px 12px 12px;
+    padding: 0px 20px;
+}
+
+.about-stats-wrapper h2 {
+    color: #2d6c5b;
 }
 
 /* Section Title */
@@ -644,10 +657,20 @@ header {
 }
 
 /* تحسين تنسيق قسم الإحصائيات */
-.about-stats-1 {
+/* .about-stats-1 {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+} */
+.about-stats-1 {
     padding: 40px 20px;
     border-radius: 12px;
     display: flex;
@@ -681,6 +704,20 @@ header {
 }
 
 /* تحسين تنسيق الإحصائيات */
+/* .stat {
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    background-color: #2d6c5b;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
 .stat {
     width: 200px;
     /* العرض الموحد */
@@ -695,12 +732,22 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: -150px;
 }
 
-.stat:hover {
+/* .stat:hover {
     transform: translateY(-10px);
     background-color: rgba(255, 255, 255, 0.1);
+    border: #2d6c5b 3px solid;
 }
+
+.stat:hover h3 {
+    color: #2d6c5b;
+}
+
+.stat:hover i {
+    color: #2d6c5b;
+} */
 
 .stat h3 {
     font-size: 2.5rem;
@@ -709,9 +756,9 @@ header {
     transition: color 0.3s ease-in-out;
 }
 
-.stat h3:hover {
+/* .stat h3:hover {
     color: #ffcc00;
-}
+} */
 
 .stat p {
     font-size: 1.1rem;
@@ -803,7 +850,7 @@ header {
     text-align: center;
     padding: 60px 20px;
     background-color: #f0f0f0;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 
 }
 
@@ -813,16 +860,22 @@ header {
     color: #2d6c5b;
 }
 
-.carousel-container {
+/* .carousel-container {
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1000px;
     position: relative;
     height: clamp(460px, 50vw, 430px);
-    /* ارتفاع مرن */
     overflow: hidden;
-    /* مهم عشان البطاقات الزايدة تختفي بشكل نظيف */
+} */
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    position: relative;
+    height: 430px;
 }
 
 /* تم تقليل المسافات بين الكروت */
@@ -1174,11 +1227,11 @@ footer {
 /* Fix for background on Company Statistics to stretch fully on mobile */
 @media (max-width: 768px) {
     .about-stats-wrapper {
-        background-image: url("../images/background-1.jpg");
+        /* background-image: url("../images/background-1.jpg"); */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: #2d6c5b;
+        background-color: #ffffff;
     }
 }
 
@@ -1255,11 +1308,10 @@ footer {
 
 @media (max-width: 768px) {
     .about-stats-wrapper {
-        background-image: url("../images/background-1.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: #2d6c5b;
+        background-color: #ffffff;
     }
 }
 
@@ -1656,20 +1708,28 @@ body[dir="rtl"] .language-switch {
 
 /*---------------------------------------------------------------------------*/
 /* Blog Section */
+
+#blog {
+    background-color: #2d6c5b;
+    /* لون الخلفية الذي تود تخصيصه */
+}
+
 .blog-section {
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     /* تنظيم العناصر من الأعلى للأسفل */
     gap: 2rem;
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 1.5rem 1rem;
+    background-color: #2d6c5b;
 }
 
 /* العنوان */
 .blog-section .section-title {
     font-size: 2.5rem;
-    color: #2d6c5b;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 1.5rem;
     font-weight: bold;
@@ -1853,8 +1913,8 @@ body[dir="rtl"] .language-switch {
 .see-all-btn {
     padding: 0.45rem 1.2rem;
     /* تقليل padding بنسبة 40% تقريبًا */
-    background-color: #2d6c5b;
-    color: #fff;
+    background-color: #fff;
+    color: #2d6c5b;
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
@@ -1945,4 +2005,86 @@ body[dir="rtl"] .nav-links {
 /* ترتيب العناصر في وضع الإنجليزية */
 body[dir="ltr"] .nav-links {
     flex-direction: row;
+}
+
+/* تحسين عرض الكروت على الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .services-wrapper {
+        grid-template-columns: 1fr;
+        /* عرض الكروت في صف واحد على الشاشات الصغيرة */
+        gap: 1.5rem;
+        /* تقليل المسافة بين الكروت */
+    }
+
+    /* ضمان الحفاظ على حجم الكرت */
+    .services-wrapper .service-box {
+        width: 100%;
+        /* الكروت تأخذ العرض بالكامل */
+        height: auto;
+        /* السماح بارتفاع الكرت حسب المحتوى */
+    }
+}
+
+/* تحسين عرض الكروت على الأجهزة اللوحية */
+@media (max-width: 1024px) {
+    .services-wrapper {
+        grid-template-columns: 1fr;
+        /* عرض الكروت في صف واحد على الأجهزة اللوحية */
+    }
+}
+
+/* على الشاشات الأكبر من 1024px */
+@media (min-width: 1024px) {
+    .services-wrapper {
+        grid-template-columns: repeat(auto-fit,
+                minmax(280px, 1fr));
+        /* عرض الأعمدة حسب حجم الشاشة */
+    }
+}
+
+/* تعديلات لقسم الإحصائيات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .about-stats-wrapper {
+        padding: 20px;
+        /* تقليل الحشو العام للقسم */
+    }
+
+    .about-stats-1 {
+        flex-direction: column;
+        /* ترتيب العناصر عمودياً */
+        align-items: center;
+        /* توسيط العناصر أفقياً */
+        gap: 30px;
+        /* تقليل المسافة بين العناصر */
+    }
+
+    .stat {
+        width: 90%;
+        /* جعل العناصر تأخذ عرض أكبر */
+        max-width: 300px;
+        /* تحديد حد أقصى للعرض */
+        height: auto;
+        /* السماح بالارتفاع التلقائي */
+        margin-top: 0;
+        /* إزالة الهامش العلوي */
+        padding: 15px;
+        /* تقليل الحشو داخل العناصر */
+    }
+
+    .stat i {
+        font-size: 2rem;
+        /* تقليل حجم الأيقونة */
+        margin-bottom: 5px;
+    }
+
+    .stat h3 {
+        font-size: 2rem;
+        /* تقليل حجم الرقم */
+        margin-bottom: 8px;
+    }
+
+    .stat p {
+        font-size: 1rem;
+        /* تقليل حجم النص */
+    }
 }

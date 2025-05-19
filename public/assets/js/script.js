@@ -209,3 +209,49 @@ function setLanguage(lang) {
         }
     });
 }
+
+var video = document.getElementById("myVideo");
+
+video.onended = function () {
+    video.currentTime = 0; // إعادة الفيديو للبداية
+    video.play(); // تشغيله مجددًا
+};
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+                console.log(
+                    "Service Worker registered with scope: ",
+                    registration.scope
+                );
+            })
+            .catch((error) => {
+                console.log("Service Worker registration failed: ", error);
+            });
+    });
+}
+const CACHE_NAME = "video-cache-v1";
+const VIDEO_URL = "/upload/video/1745654018_Homepage-Video.mp4"; // مسار الفيديو
+
+// عند تثبيت الـ Service Worker، نقوم بتخزين الفيديو في الكاش
+self.addEventListener("install", (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.add(VIDEO_URL); // إضافة الفيديو إلى الكاش
+        })
+    );
+});
+
+// استرجاع الفيديو من الكاش عند الطلب
+self.addEventListener("fetch", (event) => {
+    if (event.request.url.includes("1745654018_Homepage-Video.mp4")) {
+        // تحقق من طلب الفيديو
+        event.respondWith(
+            caches.match(event.request).then((cachedResponse) => {
+                return cachedResponse || fetch(event.request); // إذا كان في الكاش، استرجاعه، وإذا لم يكن يتم تحميله
+            })
+        );
+    }
+});
